@@ -6,6 +6,14 @@ dark-font-color = #c0c0c0
 #universe
     display: none
 
+.navbar
+    position: sticky
+    top: 0
+    z-index: 999
+    background-color: rgba(255,255,255,0.7)
+    backdrop-filter: blur(10px)
+    -webkit-backdrop-filter: blur(10px)
+
 .navbar-logo,
 .footer-logo
     .logo-img-dark
@@ -14,8 +22,8 @@ dark-font-color = #c0c0c0
 night()
     background: #0e1225
 
-    // code highlight (https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css)
-    .hljs{display:block;overflow-x:auto;padding:0.5em;color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-keyword,.hljs-formula{color:#c678dd}.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-deletion,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-meta-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-number{color:#d19a66}.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-link{text-decoration:underline}
+    // code highlight (https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css)
+    .hljs{display:block;overflow-x:auto;padding:0.5em;background:#1E1E1E;color:#DCDCDC}.hljs-keyword,.hljs-literal,.hljs-symbol,.hljs-name{color:#569CD6}.hljs-link{color:#569CD6;text-decoration:underline}.hljs-built_in,.hljs-type{color:#4EC9B0}.hljs-number,.hljs-class{color:#B8D7A3}.hljs-string,.hljs-meta-string{color:#D69D85}.hljs-regexp,.hljs-template-tag{color:#9A5334}.hljs-subst,.hljs-function,.hljs-title,.hljs-params,.hljs-formula{color:#DCDCDC}.hljs-comment,.hljs-quote{color:#57A64A;font-style:italic}.hljs-doctag{color:#608B4E}.hljs-meta,.hljs-meta-keyword,.hljs-tag{color:#9B9B9B}.hljs-variable,.hljs-template-variable{color:#BD63C5}.hljs-attr,.hljs-attribute,.hljs-builtin-name{color:#9CDCFE}.hljs-section{color:gold}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-bullet,.hljs-selector-tag,.hljs-selector-id,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo{color:#D7BA7D}.hljs-addition{background-color:#144212;display:inline-block;width:100%}.hljs-deletion{background-color:#600;display:inline-block;width:100%}
 
     .content code
         color: rgb(203,186,125)
@@ -58,8 +66,6 @@ night()
         &:focus
             color: #ffffff
             background-color: dark-primary-color
-        // &.is-active
-        //     color: #3273dc
     .navbar,
     .card
         background-color: rgba(40,44,52,0.5)
@@ -71,19 +77,26 @@ night()
         .breadcrumb li.is-active a
             color: #c0c0c0
     .footer
-        backdrop-filter: none
-        -webkit-backdrop-filter: none
+      backdrop-filter: none
+      -webkit-backdrop-filter: none
+      background-color: rgba(40,44,52,0.5)
+    
+      &:before
         background-color: rgba(40,44,52,0.5)
-        &:before
-            background-color: rgba(40,44,52,0.5)
 
     // input
     .input, .textarea
-        background-color: dark-primary-color-hover
-        border-color: dark-primary-color
+      background-color: dark-primary-color-hover
+      border-color: dark-primary-color
+    
+      &::placeholder
+        color: dark-font-color  
 
     // button
-    .button.is-primary, .button.is-light, .button.is-small
+    .button.is-primary,
+    .button.is-light,
+    .button.is-small,
+    .cc-window .cc-compliance > .cc-btn
         background-color: dark-primary-color
         color: dark-font-color
         &:hover, &.is-hovered
@@ -97,6 +110,12 @@ night()
         background-color: transparent
         &:hover
             background-color: dark-primary-color !important
+
+    input[type="submit"][value="Subscribe"]
+      background-color: #2c313a !important
+      color: dark-font-color !important
+      border-color: #282c34 !important
+
     .pagination .pagination-next,
     .pagination .pagination-previous
     .pagination-link:not(.is-current)
@@ -167,13 +186,15 @@ night()
         color: dark-font-color
     .media-content,
     .has-text-grey,
-    .link-muted
+    .link-muted,
+    .cc-window
         color: dark-font-color !important
     a
         color: rgb(82, 153, 224)
         &:hover
             color: #ffffff
     .timeline a,
+    .twikoo-new-container a,
     [data-type="recent-posts"] a
         color: dark-font-color
         &:hover
@@ -196,31 +217,32 @@ night()
     // break line
     hr
         background-color: dark-primary-color-hover
-
-    // tags and menus
-article.article, article.media 
-     .title a 
-        background-image: linear-gradient(transparent calc(100% - 1px), primary-color 1px);
-        background-repeat: no-repeat;
-        background-size: 0% 100%; // Initially hidden underline
-        transition: background-size 0.25s ease-in-out, color 0.25s ease-in-out;
-        color: inherit; // Optional: ensure default text color
-     .title:hover a 
-        background-image: linear-gradient(transparent calc(100% - 1px), dark-font-color 1px);
-        background-size: 100% 100%; // Full-width underline on hover
-        color: dark-font-color !important;
-    .tag:not(body)
-        color: dark-font-color
-        background-color: dark-primary-color
-    .widget .tags .tag:first-child,
-    .tag.is-grey
-        background-color: dark-primary-color-hover
-    .menu-list a:hover
-        background-color: dark-primary-color
-    .menu-list a.is-active
-        background-color: dark-primary-color-hover
-    .menu-list li ul
-        border-color: dark-primary-color
+     article.article, article.media
+        .title a 
+           background-image: linear-gradient(transparent calc(100% - 1px), primary-color 1px);
+           background-repeat: no-repeat;
+           background-size: 0% 100%; // Initially hidden underline
+           transition: background-size 0.25s ease-in-out, color 0.25s ease-in-out;
+           color: inherit; // Optional: ensure default text color
+        .title:hover a 
+           background-image: linear-gradient(transparent calc(100% - 1px), dark-font-color 1px);
+           background-size: 100% 100%; // Full-width underline on hover
+           color: dark-font-color !important;
+       .widget .tags .tag:last-child,
+       .tag:not(body)
+           color: dark-font-color
+           background-color: dark-primary-color
+       .widget .tags .tag:first-child,
+       .tag.is-grey
+           // color: dark-font-color
+	   color: #ffffff
+           // background-color: dark-primary-color-hover
+       .menu-list a:hover
+           background-color: dark-primary-color
+       .menu-list a.is-active
+           background-color: dark-primary-color-hover
+       .menu-list li ul
+           border-color: dark-primary-color
 
     // time line
     .timeline .media:last-child:after
@@ -245,8 +267,8 @@ article.article, article.media
         .searchbox-container .searchbox-result-section .searchbox-result-item:hover,
         .searchbox-container .searchbox-result-section .searchbox-result-item.active,
         .searchbox-container .searchbox-header .searchbox-close:hover
-            color: #ffffff
-            background-color: dark-primary-color-hover
+            color: dark-font-color 
+            background-color: #434a56 !important 
 
     // selection
     ::selection
@@ -260,6 +282,11 @@ article.article, article.media
         -webkit-text-fill-color: dark-font-color !important
         box-shadow: 0 0 0px 1000px dark-primary-color inset
 
+    // cookie window
+    .cc-window
+        background-color: rgba(40,44,52,0.5) !important
+        backdrop-filter: blur(10px)
+
     // twikoo
     .twikoo
         pre
@@ -267,6 +294,8 @@ article.article, article.media
         code
             color: rgb(203,186,125)
             background-color: dark-primary-color
+    #weixin-search-logo
+        background-image: url("/images/weixin/whitelogo.svg")
 
 body.night
     night()

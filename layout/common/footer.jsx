@@ -39,14 +39,18 @@ class Footer extends Component {
                             {footerLogo}
                         </a>
                         <p class="is-size-7">
-                            <span dangerouslySetInnerHTML={{ __html: `&copy; ${siteYear} ${author || siteTitle}` }}></span>
-                            &nbsp;&nbsp;Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>&nbsp;&&nbsp;
-                            <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                            <span>&copy; {siteYear} {author}&nbsp;&nbsp;</span>
+                            <span>
+                                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp;
+                                <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener"> Icarus</a>
+                            </span>
                             {showVisitorCounter ? <br /> : null}
                             {showVisitorCounter ? <span id="busuanzi_container_site_uv"
                                 dangerouslySetInnerHTML={{ __html: visitorCounterTitle }}></span> : null}
                         </p>
-                        {copyright ? <p class="is-size-7" dangerouslySetInnerHTML={{ __html: copyright }}></p> : null}
+                        {copyright
+                            ? <p class="is-size-7" dangerouslySetInnerHTML={{ __html: copyright }}></p>
+                            : null}
                     </div>
                     <div class="level-end">
                         {Object.keys(links).length ? <div class="field has-addons">
@@ -85,17 +89,22 @@ module.exports = cacheComponent(Footer, 'common.footer', props => {
         });
     }
 
+    const startYear = footer?.start_year || new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
+    const siteYear = startYear === currentYear ? `${currentYear}` : `${startYear}–${currentYear}`;
+
     return {
         logo,
         logoLightUrl: url_for(logoLight),
         logoDarkUrl: url_for(logoDark),
         siteUrl: url_for('/'),
         siteTitle: title,
-        siteYear: date(new Date(), 'YYYY'),
-        author,
+        siteYear,
+        author: author || title,
         links,
         copyright: footer?.copyright ?? '',
         showVisitorCounter: plugins && plugins.busuanzi === true,
         visitorCounterTitle: _p('plugin.visitor_count', '<span id="busuanzi_value_site_uv">0</span>')
     };
 });
+

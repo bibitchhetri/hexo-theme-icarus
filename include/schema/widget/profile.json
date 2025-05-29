@@ -70,9 +70,9 @@
                         "icon": "fab fa-facebook",
                         "url": "https://facebook.com"
                     },
-                    "Twitter": {
-                        "icon": "fab fa-twitter",
-                        "url": "https://twitter.com"
+                    "X": {
+                        "icon": "fab fa-x-twitter",
+                        "url": "https://x.com"
                     },
                     "Dribbble": {
                         "icon": "fab fa-dribbble",

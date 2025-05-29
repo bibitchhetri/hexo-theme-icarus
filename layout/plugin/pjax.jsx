@@ -9,8 +9,9 @@ class Pjax extends Component {
         const { url_for, cdn } = helper;
 
         return <Fragment>
-            <script src={cdn('pjax', '0.2.8', 'pjax.min.js')}></script>
-            <script src={url_for('/js/pjax.js')}></script>
+	    {/* temporary fix for flickering issue while navigating through navbar items */}
+            {/* <script src={cdn('pjax', '0.2.8', 'pjax.min.js')}></script> */}
+            {/* <script src={url_for('/js/pjax.js')}></script> */}
         </Fragment>;
     }
 }

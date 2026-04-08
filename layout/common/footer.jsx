@@ -40,9 +40,10 @@ class Footer extends Component {
                         </a>
                         <p class="is-size-7">
                             <span>&copy; {siteYear} {author}&nbsp;&nbsp;</span>
+                            <br />
                             <span>
                                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp;
-                                <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener"> Icarus</a>
+                                <a href="https://github.com/bibitchhetri/hexo-theme-icarus" target="_blank" rel="noopener"> Icarus</a>
                             </span>
                             {showVisitorCounter ? <br /> : null}
                             {showVisitorCounter ? <span id="busuanzi_container_site_uv"

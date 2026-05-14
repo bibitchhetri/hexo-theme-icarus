@@ -29,8 +29,10 @@ module.exports = class extends Component {
                                 'order-2': true,
                                 'column-main': true,
                                 'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
+                                'is-8-tablet is-8-desktop': true,
+                                'is-9-widescreen': columnCount === 2 && page.hide_right_sidebar,
+                                'is-8-widescreen': columnCount === 2 && !page.hide_right_sidebar,
+                                'is-6-widescreen': columnCount === 3
                             })} dangerouslySetInnerHTML={{ __html: body }}></div>
                             <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
                             <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />

@@ -21,11 +21,16 @@ function formatWidgets(widgets) {
     return result;
 }
 
+const HIDDEN_RIGHT_WIDGETS = ['recent_posts', 'archives', 'tags', 'adsense'];
+
 function hasColumn(widgets, position, config, page) {
     const showToc = (config.toc === true) && ['page', 'post'].includes(page.layout);
     if (Array.isArray(widgets)) {
         return typeof widgets.find(widget => {
             if (widget.type === 'toc' && !showToc) {
+                return false;
+            }
+            if (position === 'right' && page.hide_right_sidebar && HIDDEN_RIGHT_WIDGETS.includes(widget.type)) {
                 return false;
             }
             return widget.position === position;
@@ -38,7 +43,10 @@ function getColumnCount(widgets, config, page) {
     return [hasColumn(widgets, 'left', config, page), hasColumn(widgets, 'right', config, page)].filter(v => !!v).length + 1;
 }
 
-function getColumnSizeClass(columnCount) {
+function getColumnSizeClass(columnCount, page) {
+    if (columnCount === 2 && page && page.hide_right_sidebar) {
+        return 'is-4-tablet is-4-desktop is-3-widescreen';
+    }
     switch (columnCount) {
         case 2:
             return 'is-4-tablet is-4-desktop is-4-widescreen';
@@ -68,8 +76,11 @@ function isColumnSticky(config, position) {
 class Widgets extends Component {
     render() {
         const { site, config, helper, page, position } = this.props;
-        const widgets = formatWidgets(config.widgets)[position] || [];
+        let widgets = formatWidgets(config.widgets)[position] || [];
         const columnCount = getColumnCount(config.widgets, config, page);
+        if (position === 'right' && page.hide_right_sidebar) {
+            widgets = widgets.filter(function (w) { return !HIDDEN_RIGHT_WIDGETS.includes(w.type); });
+        }
 
         if (!widgets.length) {
             return null;
@@ -78,7 +89,7 @@ class Widgets extends Component {
         return <div class={classname({
             'column': true,
             ['column-' + position]: true,
-            [getColumnSizeClass(columnCount)]: true,
+            [getColumnSizeClass(columnCount, page)]: true,
             [getColumnVisibilityClass(columnCount, position)]: true,
             [getColumnOrderClass(position)]: true,
             'is-sticky': isColumnSticky(config, position)

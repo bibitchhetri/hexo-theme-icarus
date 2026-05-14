@@ -166,7 +166,9 @@ module.exports = class extends Component {
             {rss ? <link rel="alternate" href={url_for(rss)} title={config.title} type="application/atom+xml" /> : null}
             {favicon ? <link rel="icon" href={url_for(favicon)} /> : null}
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-            {hlTheme ? <link data-pjax rel="stylesheet" href={cdn('highlight.js', '11.7.0', 'styles/' + hlTheme + '.css')} /> : null}
+            {hlTheme ? (['tokyo-night-moon', 'gruvbox-material-dark-hard', 'dracula'].includes(hlTheme)
+                ? <link data-pjax rel="stylesheet" href={url_for('/css/' + hlTheme + '.css')} />
+                : <link data-pjax rel="stylesheet" href={cdn('highlight.js', '11.7.0', 'styles/' + hlTheme + '.css')} />) : null}
             <link rel="stylesheet" href={fontCssUrl[variant]} />
             <link data-pjax rel="stylesheet" href={url_for('/css/' + variant + '.css')} />
             <Plugins site={site} config={config} helper={helper} page={page} head={true} />

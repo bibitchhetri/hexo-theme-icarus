@@ -10,12 +10,13 @@ function getWordCount(content) {
 
 module.exports = class extends Component {
     render() {
-        const { config, helper, page } = this.props;
+        const { config, helper, page, basePath } = this.props;
         const { url_for, date_xml } = helper;
+        const bp = basePath || '/projects/';
 
         const words = getWordCount(page._content);
         const readTime = moment.duration((words / 150.0) * 60, 'seconds').humanize();
-        const href = url_for('/projects/' + page.slug + '/');
+        const href = url_for(bp + page.slug + '/');
 
         const tags = Array.isArray(page.tags) ? page.tags : [];
         const categories = Array.isArray(page.categories) ? page.categories : [];

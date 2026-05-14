@@ -18,6 +18,7 @@ module.exports = class extends Component {
             <Head site={site} config={config} helper={helper} page={page} />
             <body class={`is-${columnCount}-column`}>
                 <script type="text/javascript" src="/js/imaegoo/night.js"></script>
+                <script type="text/javascript" src="/js/imaegoo/universe-toggle.js"></script>
                 <canvas id="universe"></canvas>
 
                 <Navbar config={config} helper={helper} page={page} />

@@ -61,6 +61,9 @@ class Navbar extends Component {
                         <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
                             <i class="fas fa-moon" id="night-icon"></i>
                         </a>
+                        <a class="navbar-item" id="universe-nav" title="Toggle Stars" href="javascript:;">
+                            <i class="far fa-star" id="universe-icon"></i>
+                        </a>
                         {Object.keys(links).length ? <Fragment>
                             {Object.keys(links).map(name => {
                                 const link = links[name];

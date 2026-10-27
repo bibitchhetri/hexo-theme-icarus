@@ -51,6 +51,18 @@ module.exports = class extends Component {
 
         const noIndex = helper.is_archive() || helper.is_category() || helper.is_tag();
 
+        // `page.canonical` lets generated collection pages (and their duplicate
+        // post copies) declare the one URL search engines should index.
+        const siteUrl = (url || '').replace(/\/+$/, '');
+        let canonicalUrl;
+        if (typeof page.canonical === 'string') {
+            canonicalUrl = siteUrl + (url_for(page.canonical) || '/');
+        } else if (canonical_url) {
+            canonicalUrl = canonical_url;
+        } else if (typeof page.path === 'string') {
+            canonicalUrl = siteUrl + (url_for(page.path.replace(/index\.html$/, '')) || '/');
+        }
+
         const language = page.lang || page.language || config.language;
         const fontCssUrl = {
             default: fontcdn('Ubuntu:wght@400;600&family=Source+Code+Pro', 'css2'),
@@ -162,7 +174,7 @@ module.exports = class extends Component {
                 updated={page.updated}
                 images={structuredImages} /> : null}
 
-            {canonical_url ? <link rel="canonical" href={canonical_url} /> : null}
+            {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
             {rss ? <link rel="alternate" href={url_for(rss)} title={config.title} type="application/atom+xml" /> : null}
             {favicon ? <link rel="icon" href={url_for(favicon)} /> : null}
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />

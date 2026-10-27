@@ -173,6 +173,7 @@ module.exports = class extends Component {
             <link data-pjax rel="stylesheet" href={url_for('/css/' + variant + '.css')} />
             <Plugins site={site} config={config} helper={helper} page={page} head={true} />
 
+            {adsenseClientId ? <meta name="google-adsense-account" content={adsenseClientId} /> : null}
             {adsenseClientId ? <script data-ad-client={adsenseClientId}
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script> : null}
 
